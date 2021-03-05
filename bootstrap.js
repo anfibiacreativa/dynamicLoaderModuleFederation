@@ -9,8 +9,8 @@
 // this should come from an API, right!?
 import { mfes } from './microfrontends.js';
 
-function loadScope() {
-  // this should be configurable
+loadScope = () => {
+  // iterate over mfe's and get config options
   mfes.forEach((mfe) =>{
     let currentScope = mfe.scope;
     let publicName = mfe.el;
@@ -18,7 +18,6 @@ function loadScope() {
 
     let globalScope = self[currentScope];
     let isScopeLoaded = typeof(globalScope) !== 'undefined';
-    // Also should make dynamically configurable
   
     if (isScopeLoaded) {
       if (Object.keys(globalScope).length) {
