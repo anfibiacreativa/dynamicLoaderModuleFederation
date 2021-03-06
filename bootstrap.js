@@ -8,8 +8,9 @@
 
 // this should come from an API, right!?
 import { mfes } from './microfrontends.js';
-
-loadScope = () => {
+// this should be probably a configurable global variable, but keep in mind this may be different from script to script, since file name is effectively configurable!!!
+const REMOTES_FILENAME = 'remoteEntry';
+const loadScope = () => {
   // iterate over mfe's and get config options
   mfes.forEach((mfe) =>{
     let currentScope = mfe.scope;
@@ -48,7 +49,7 @@ const getRemotes = document.addEventListener(
   'DOMContentLoaded', (e) => {
     const scripts = Array.from(document.getElementsByTagName('script'));
 
-    scripts.filter(script => { if (script.outerHTML.includes('remoteEntry')) { remotes.push(script) } });
+    scripts.filter(script => { if (script.outerHTML.includes(REMOTES_FILENAME)) { remotes.push(script) } });
     console.log(remotes, 'scripts ready');
 
     remotes.forEach(remote => {
